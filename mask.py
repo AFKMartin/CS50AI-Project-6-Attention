@@ -45,20 +45,27 @@ def get_mask_token_index(mask_token_id, inputs):
     Return the index of the token with the specified `mask_token_id`, or
     `None` if not present in the `inputs`.
     """
-    # TODO: Implement this function
-    raise NotImplementedError
+    # Get the input ID
+    input_ids = inputs["input_ids"][0]
 
+    # Convert tensor to numpy for simplicity
+    input_ids = input_ids.numpy()
 
+    # Search for the mask token id
+    for i, token_id in enumerate(input_ids):
+        if token_id == mask_token_id:
+            return i
+
+    # In case we didnt find return None
+    return None
 
 def get_color_for_attention_score(attention_score):
     """
     Return a tuple of three integers representing a shade of gray for the
     given `attention_score`. Each value should be in the range [0, 255].
     """
-    # TODO: Implement this function
-    raise NotImplementedError
-
-
+    gray = int(attention_score * 255)
+    return gray, gray, gray
 
 def visualize_attentions(tokens, attentions):
     """
@@ -70,7 +77,7 @@ def visualize_attentions(tokens, attentions):
     include both the layer number (starting count from 1) and head number
     (starting count from 1).
     """
-    # TODO: Update this function to produce diagrams for all layers and heads.
+    # TODO: Update this function to produce diagrams for all layers and heads. (Pending for Implement)
     generate_diagram(
         1,
         1,
